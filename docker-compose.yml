@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+
+  admin-server:
+    image: flashk/spring-boot-admin:latest
+    container_name: admin-server
+    ports:
+    - "9090:9090"
+    environment:
+      - ADMIN_SERVER_USERNAME=${ADMIN_SERVER_USERNAME:-admin}
+      - ADMIN_SERVER_PASSWORD=${ADMIN_SERVER_PASSWORD:-admin}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+    networks:
+      - default
+      - rss-tracker-app_default
+
+networks:
+  default:
+    driver: bridge
+  
+  # 1. Add every external network that needs access to any spring cloud server.
+  # 2. Then add the network to every container that needs to be connected from any external client.
+  rss-tracker-app_default:
+    external: true
