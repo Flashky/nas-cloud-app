@@ -51,6 +51,6 @@ docker-compose --env-file .env.dev up -d
 
 Use the following command to remove old images:
 
-````bash
+```bash
 docker image prune -f
 ```
